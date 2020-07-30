@@ -3,7 +3,6 @@
 from simpletransformers.classification import ClassificationModel
 import pandas as pd
 import sklearn
-from sklearn.model_selection import train_test_split
 import logging
 from sklearn import preprocessing
 
@@ -29,7 +28,6 @@ class Classifier:
         self.dat[Y]=X
         
     def train(self,split=0.7,num_epochs=10):
-        xtrain,ytrain,xtest,ytest=[],[],[],[]
         self.le=preprocessing.LabelEncoder()
         print(list(self.dat.keys()))
         self.le.fit(list(self.dat.keys()))

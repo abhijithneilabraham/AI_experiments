@@ -5,6 +5,8 @@ import pandas as pd
 import sklearn
 from sklearn.model_selection import train_test_split
 import logging
+from sklearn import preprocessing
+
 
 x_hotel = ['book a hotel', 'need a nice place to stay','need to spend the night','find a hotel']
 x_weather = ['what is the weather like', 'is it hot outside','will it rain today', 'is it hot to go out']
@@ -13,28 +15,42 @@ class Classifier:
         logging.basicConfig(level=logging.INFO)
         transformers_logger = logging.getLogger("transformers")
         transformers_logger.setLevel(logging.WARNING)
-    
+
         train_args={
             'overwrite_output_dir': True,
             'num_train_epochs': 10,
         }
-    
-        # Create a ClassificationModel
-        self.model = ClassificationModel(model_type, model_name, num_labels=2, use_cuda=use_cuda, cuda_device=0, args=train_args)
 
-    def fit(self,x1,x2,split=0.3):
+        # Create a ClassificationModel
+        self.model_type=model_type
+        self.model_name=model_name
+        self.use_cuda=use_cuda
+        self.train_args=train_args
+        self.dat={}
+        self.rerun=False
+
+    def add(self,X,Y):
+        self.dat[Y]=X
+        
+    def train(self,split=0.7):
+        xtrain,ytrain,xtest,ytest=[],[],[],[]
+        self.le=preprocessing.LabelEncoder()
+        print(list(self.dat.keys()))
+        self.le.fit(list(self.dat.keys()))
+        
         train_data=[]
         eval_data=[]
-        x1t, x1e, x2t, x2e = train_test_split( x1,x2, test_size=split, random_state=42)
-        for x1,x2 in zip(x1t,x2t):
-            train_data.append([x1,0])
-            train_data.append([x2,1])
-        for x1,x2 in zip(x1e,x2e):
-            eval_data.append([x1,0])
-            eval_data.append([x2,1])
+        for k,v in self.dat.items():
+            len_train=int(round(len(v)*split))
+            train_data.extend([[i,self.le.transform([k])[0]] for i in v[:len_train]])
+
+            eval_data.extend([[i,self.le.transform([k])[0]] for i in v[len_train:]])
+
+
+        print(train_data,eval_data)
         train_df = pd.DataFrame(train_data)
         eval_df = pd.DataFrame(eval_data)
-
+        self.model = ClassificationModel(self.model_type, self.model_name, num_labels=len(list(self.dat.keys())), use_cuda=self.use_cuda, cuda_device=0, args=self.train_args)
         # Train the model
         self.model.train_model(train_df, eval_df=eval_df)
 
@@ -44,11 +60,11 @@ class Classifier:
 
     def predict(self,x):
         predictions, raw_outputs = self.model.predict(x)
-        return predictions
-    
+        return self.le.inverse_transform(predictions)
+
 clf=Classifier('roberta', 'roberta-base',use_cuda=False,)
-clf.fit(x_hotel,x_weather)
-print(clf.predict(["book me a hotel","is weather to be hot"]))
-
-    
-
+clf.add(x_hotel,"hotel")
+clf.add(x_weather,"weather")
+clf.add(['good','bad','ugly','better'],"looks")
+clf.train()
+# print(clf.predict(["book me a hotel","is the weather hot today"]))

@@ -16,23 +16,19 @@ class Classifier:
         transformers_logger = logging.getLogger("transformers")
         transformers_logger.setLevel(logging.WARNING)
 
-        train_args={
-            'overwrite_output_dir': True,
-            'num_train_epochs': 10,
-        }
+
 
         # Create a ClassificationModel
         self.model_type=model_type
         self.model_name=model_name
         self.use_cuda=use_cuda
-        self.train_args=train_args
         self.dat={}
         self.rerun=False
 
     def add(self,X,Y):
         self.dat[Y]=X
         
-    def train(self,split=0.7):
+    def train(self,split=0.7,num_epochs=10):
         xtrain,ytrain,xtest,ytest=[],[],[],[]
         self.le=preprocessing.LabelEncoder()
         print(list(self.dat.keys()))
@@ -50,7 +46,11 @@ class Classifier:
         print(train_data,eval_data)
         train_df = pd.DataFrame(train_data)
         eval_df = pd.DataFrame(eval_data)
-        self.model = ClassificationModel(self.model_type, self.model_name, num_labels=len(list(self.dat.keys())), use_cuda=self.use_cuda, cuda_device=0, args=self.train_args)
+        train_args={
+            'overwrite_output_dir': True,
+            'num_train_epochs': num_epochs,
+        }
+        self.model = ClassificationModel(self.model_type, self.model_name, num_labels=len(list(self.dat.keys())), use_cuda=self.use_cuda, cuda_device=0, args=train_args)
         # Train the model
         self.model.train_model(train_df, eval_df=eval_df)
 
@@ -67,4 +67,5 @@ clf.add(x_hotel,"hotel")
 clf.add(x_weather,"weather")
 clf.add(['good','bad','ugly','better'],"looks")
 clf.train()
-# print(clf.predict(["book me a hotel","is the weather hot today"]))
+print(clf.predict(["book me a hotel","is the weather hot today"]))
+

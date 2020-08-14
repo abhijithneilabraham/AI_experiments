@@ -55,7 +55,7 @@ def csv2sql(data_frame, schema, output_path):
 
     
 
-    
+
 
 df=get_dataframe(path)
 schema=get_schema_for_csv(path)

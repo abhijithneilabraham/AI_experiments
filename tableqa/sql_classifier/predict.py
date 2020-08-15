@@ -5,6 +5,11 @@ Created on Sat Aug 15 00:27:17 2020
 
 @author: abhijithneilabraham
 """
+
+import pickle
+with open('transform.pkl', 'rb') as le_pickle:
+    le = pickle.load(le_pickle) 
+
 from tensorflow.keras.models import Sequential, load_model, model_from_config
 from sentence_transformers import SentenceTransformer
 from numpy import asarray
@@ -18,8 +23,11 @@ def test():
         ip=input("Enter your question \n")
         if ip!="quit":
             emb=asarray(bert_model.encode(ip))
-            print("Numerical" if model.predict_classes(emb)[0][0]==0 else "Descriptive")
+            print(le.inverse_transform(model.predict_classes(emb))[0])
         else:
             break
         
 test()
+
+
+

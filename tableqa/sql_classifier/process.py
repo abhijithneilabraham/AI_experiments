@@ -8,13 +8,16 @@ Created on Fri Aug 14 23:02:31 2020
 
 import pandas as pd
 import numpy as np
-data=pd.read_csv("Question_Classification_Dataset.csv",usecols=["Questions","Category1"])
+data=pd.read_csv("refined_data.csv",usecols=["Questions","Category1"])[:400]
 y=[]
 for i in data["Category1"]:
     if i =="NUM":
-        y.append(0)        
+        y.append("count")        
     else:
-        y.append(1)
-data["type"]=y
-print(data)  
-data.to_csv("refined_data.csv")      
+        y.append("desc")
+data["Category1"]=y
+
+data2=pd.read_csv("maxminavg.csv",usecols=["Questions","Category1"])
+dataset=pd.concat([data,data2])
+dataset.reset_index(drop=True,inplace=True)
+dataset.to_csv("dataset.csv")      

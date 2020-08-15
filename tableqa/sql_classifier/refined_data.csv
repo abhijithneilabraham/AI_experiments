@@ -1,5 +1,15 @@
 ,Questions,Category1,type
 0,How did serfdom develop in and then leave Russia ?,DESC,1
+0,Count number of people who came for the show,NUM
+0,find the sum of money collected over all the given years,NUM
+0,find me the best resorts to stay,DESC
+0,Which are the indoor games which kids can play?
+0,Sum of collections,NUM
+0,Total value of this one,NUM
+0,Total price of all items,NUM
+0,Total deaths caused due to chernobyl,NUM
+0,get me the sum of all items bought today,NUM
+0,Aggregate gdp in the past few years is,NUM
 1,What films featured the character Popeye Doyle ?,ENTY,1
 2,How can I find a list of celebrities ' real names ?,DESC,1
 3,What fowl grabs the spotlight after the Chinese Year of the Monkey ?,ENTY,1
@@ -9,7 +19,7 @@
 7,What is the oldest profession ?,HUM,1
 8,What are liver enzymes ?,DESC,1
 9,Name the scar-faced bounty hunter of The Old West .,HUM,1
-10,When was Ozzy Osbourne born ?,NUM,0
+10,When was Ozzy Osbourne born ?,DESC,0
 11,Why do heavier objects travel downhill faster ?,DESC,1
 12,Who was The Pride of the Yankees ?,HUM,1
 13,Who killed Gandhi ?,HUM,1
@@ -19,7 +29,7 @@
 17,How many Jews were executed in concentration camps during WWII ?,NUM,0
 18,What is `` Nine Inch Nails '' ?,DESC,1
 19,What is an annotated bibliography ?,DESC,1
-20,What is the date of Boxing Day ?,NUM,0
+20,What is the date of Boxing Day ?,DESC,0
 21,What articles of clothing are tokens in Monopoly ?,ENTY,1
 22,Name 11 famous martyrs .,HUM,1
 23,What 's the Olympic motto ?,DESC,1
@@ -35,7 +45,7 @@
 33,Which company that manufactures video-game hardware sells the `` super system '' ?,HUM,1
 34,How many Community Chest cards are there in Monopoly ?,NUM,0
 35,What do Mormons believe ?,DESC,1
-36,When did the neanderthal man live ?,NUM,0
+36,When did the neanderthal man live ?,DESC,0
 37,In what religion was Isis the nature goddess ?,ENTY,1
 38,Where do the adventures of `` The Swiss Family Robinson '' take place ?,LOC,1
 39,What relative of the racoon is sometimes known as the cat-bear ?,ENTY,1
@@ -88,8 +98,8 @@
 86,What country did King Wenceslas rule ?,LOC,1
 87,What is a fear of shadows ?,ENTY,1
 88,Who were the five Marx brothers ?,HUM,1
-89,In which year was New Zealand excluded from the ANZUS alliance ?,NUM,0
-90,When did CNN begin broadcasting ?,NUM,0
+89,In which year was New Zealand excluded from the ANZUS alliance ?,DESC,0
+90,When did CNN begin broadcasting ?,DESC,0
 91,What causes the body to shiver in cold temperatures ?,DESC,1
 92,What are bear and bull markets ?,DESC,1
 93,What J.R.R. Tolkien book features Bilbo Baggins as the central character ?,ENTY,1
@@ -97,7 +107,7 @@
 95,What is the meaning of Jesus ?,DESC,1
 96,What company 's logo is a `` W '' in a circle ?,HUM,1
 97,What is the definition of a cascade ?,DESC,1
-98,When did Rococo painting and architecture flourish ?,NUM,0
+98,When did Rococo painting and architecture flourish ?,DESC,0
 99,What country 's national passenger rail system is called Via ?,LOC,1
 100,Who invented Make-up ?,HUM,1
 101,What is the origin of the word `` attic '' ?,DESC,1
@@ -128,7 +138,7 @@
 126,How was the element calcium named ?,DESC,1
 127,What crooner joined The Andrews Sisters for Pistol Packin Mama ?,HUM,1
 128,What piano company claims its product is the `` Instrument of the immortals '' ?,HUM,1
-129,When did the Bounty mutiny take place ?,NUM,0
+129,When did the Bounty mutiny take place ?,DESC,0
 130,What novel inspired the movie BladeRunner ?,ENTY,1
 131,What is a transistor ?,DESC,1
 132,What is a film starring Jude Law ?,ENTY,1
@@ -160,14 +170,14 @@
 158,"What poem contains the line , `` grow old with me the best is yet to be '' .",ENTY,1
 159,What is a dental root canal ?,DESC,1
 160,What war did the Wanna-Go-Home Riots occur after ?,ENTY,1
-161,What is the busiest air travel season ?,NUM,0
+161,What is the busiest air travel season ?,DESC,0
 162,What 's the colored part of the eye called ?,ENTY,1
 163,What are hook worms ?,DESC,1
 164,Where is the Rose Bowl played ?,LOC,1
 165,Which Japanese car maker had its biggest percentage of sale in the domestic market ?,HUM,1
 166,Who is the mayor of Marbella ?,HUM,1
 167,"What sun-blasted , 14-mile wide valley is just north of the Mojave desert ?",LOC,1
-168,In what year did Thatcher become prime minister ?,NUM,0
+168,In what year did Thatcher become prime minister ?,DESC,0
 169,How many months does it take the moon to revolve around the Earth ?,NUM,0
 170,Where are the 49 steps ?,LOC,1
 171,In what year was De Gaulle elected president of France ?,NUM,0

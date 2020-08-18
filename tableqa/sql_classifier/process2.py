@@ -20,7 +20,10 @@ with jsonlines.open('train.jsonl') as f:
         
         
 data["questions"],data["types"]=questions,types
-data.to_csv("wikidata.csv")
+deta=data[data["types"].values != 0]
+deta0=data[data["types"].values==0][:6000]
+deta=pd.concat([deta,deta0])
+deta.to_csv("wikidata.csv")
         
         
         

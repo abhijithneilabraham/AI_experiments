@@ -21,22 +21,24 @@ from tensorflow.keras.layers import Dense, Flatten, LSTM, Conv1D, MaxPooling1D, 
 
 def get_keras_model():
     """Define the model."""
-    bert_model = Sequential()
-    bert_model.add(Dense(300, input_shape=[768,], activation='relu'))
-    bert_model.add(Dense(64,activation='relu'))
-    bert_model.add(Dense(6, activation='softmax'))
-    bert_model.compile(loss = 'sparse_categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
-    bert_model.summary()
-    return bert_model
+    model = Sequential()
+    model.add(Dense(512, input_shape=[768,], activation='relu'))
+    model.add(Dense(128,activation='relu'))
+    model.add(Dense(6, activation='softmax'))
+    model.compile(loss = 'sparse_categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
+    model.summary()
+    return model
 
 data=pd.read_csv("wikidata.csv",usecols=["questions","types"])
 
 categories=data["types"]
+#print(categories.tolist().count(0))
 
 
 x_train, x_test, y_train,y_test =train_test_split(data["questions"],categories)
 
 bert_model = SentenceTransformer('bert-base-nli-mean-tokens')
+# bert_model = SentenceTransformer('average_word_embeddings_glove.6B.300d')
 
 train_embeddings = asarray(bert_model.encode(x_train.tolist()), dtype = "float32")
 test_embeddings = asarray(bert_model.encode(x_test.tolist()), dtype = "float32")
@@ -44,7 +46,7 @@ y_train=asarray(y_train,dtype="float32")
 y_test=asarray(y_test,dtype="float32")
 
 model = get_keras_model()
-model.fit(train_embeddings, y_train, epochs=50,validation_data=(test_embeddings,y_test))
+model.fit(train_embeddings, y_train, epochs=100,validation_data=(test_embeddings,y_test))
 
 print('\n# Evaluate on test data')
 results = model.evaluate(test_embeddings, y_test, batch_size=128)
